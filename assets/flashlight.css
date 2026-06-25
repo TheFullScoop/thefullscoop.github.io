@@ -1,0 +1,150 @@
+/* flashlight.css — The Full Scoop house style. ONE stylesheet, every page. Restrained editorial:
+   serif for reading, sans for UI, generous whitespace, hairline rules, neutral-by-construction lean. */
+@font-face{font-family:"Source Serif 4";src:url(fonts/serif-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Source Serif 4";src:url(fonts/serif-600.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Source Sans 3";src:url(fonts/sans-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Source Sans 3";src:url(fonts/sans-600.woff2) format("woff2");font-weight:600;font-display:swap}
+:root{
+  --ink:#1a1714; --body:#33302b; --mut:#6f6a62; --faint:#78736a;
+  --paper:#fffefb; --panel:#f5f2ec; --panel2:#efebe3; --line:#e7e2d8; --line2:#d8d2c5;
+  --accent:#2f5d62; --accent-ink:#234a4e;
+  --ok:#3f6b4f;
+  /* lean palette — non-partisan + accessible (teal/slate/amber, never red/blue); labels render in --ink so meaning never depends on color (WCAG 1.4.1), center/right darkened to AA */
+  --lean-l:#2c7a7b; --lean-c:#6f6a5e; --lean-r:#966114; --lean-on:#1a1714;
+  --serif:"Source Serif 4","Iowan Old Style",Palatino,"Georgia",serif;
+  --sans:"Source Sans 3",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --wrap:720px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--body);font-family:var(--serif);font-size:18px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.skip{position:absolute;left:-999px}.skip:focus{left:8px;top:8px;background:#fff;padding:8px;z-index:9}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 22px}
+a{color:var(--accent-ink);text-underline-offset:2px;text-decoration-thickness:.5px}
+.kicker{font-family:var(--sans);font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin:0 0 6px}
+h1{font-family:var(--serif);font-weight:600;font-size:2rem;line-height:1.18;letter-spacing:-.01em;color:var(--ink);margin:.1em 0 .35em}
+h2{font-family:var(--sans);font-weight:600;font-size:1.08rem;letter-spacing:-.01em;color:var(--ink);margin:2.2em 0 .7em;padding-bottom:.4em;border-bottom:.5px solid var(--line2)}
+.dek{font-family:var(--serif);font-size:1.18rem;color:var(--mut);line-height:1.5;margin:.3em 0 0}
+
+/* ---- masthead (byte-identical everywhere) ---- */
+.mast{border-bottom:1.5px solid var(--ink);background:var(--paper)}
+.mast .wrap{display:flex;align-items:center;gap:11px;padding:16px 22px 13px;flex-wrap:wrap}
+.mast-mark{width:24px;height:24px;flex:none}
+.mast-name{font-family:var(--serif);font-weight:600;font-size:1.4rem;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+.mast-tag{font-family:var(--sans);color:var(--mut);font-size:.8rem;border-left:.5px solid var(--line2);padding-left:11px}
+.nav{margin-left:auto;display:flex;gap:15px;font-family:var(--sans);font-size:.84rem}
+.nav a{color:var(--mut);text-decoration:none}.nav a:hover{color:var(--accent-ink)}
+
+/* ---- article furniture ---- */
+main{padding:26px 0 8px}
+.dateline{font-family:var(--sans);font-size:.83rem;color:var(--mut);margin:.1em 0 1.2em;display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.chip{font-family:var(--sans);font-size:.72rem;border:.5px solid var(--line2);border-radius:6px;padding:2px 8px;color:var(--mut)}
+.describe{font-family:var(--sans);font-size:.88rem;line-height:1.55;color:var(--body);background:var(--panel);border:.5px solid var(--line);border-radius:5px;padding:13px 16px;margin:18px 0 26px}
+.describe strong{color:var(--ink)}
+.plainwords{font-family:var(--serif);font-size:1.16rem;line-height:1.58;margin:10px 0 8px;color:var(--ink)}
+.plainwords p{margin:0 0 .75em}.plainwords .kicker{margin-bottom:8px}
+.hook{font-family:var(--sans);font-size:1rem;line-height:1.5;background:var(--panel);border:.5px solid var(--line);border-radius:5px;padding:14px 16px;margin:18px 0}
+.hook .kicker{color:var(--mut)}
+.howmade{font-family:var(--sans);font-size:.86rem;background:#fff;border:.5px solid var(--line);border-radius:5px;padding:14px 16px 8px;margin:24px 0}
+.howmade dl{margin:0}
+.howmade .row{display:flex;justify-content:space-between;gap:12px;padding:5px 0;border-top:.5px solid var(--line)}
+.howmade .row:first-of-type{border-top:0}
+.howmade dt{color:var(--mut)}.howmade dd{margin:0;text-align:right;color:var(--ink)}
+
+/* ---- neutral lean indicator (position + text, never partisan color) ---- */
+.lean{display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-size:.78rem;color:var(--ink);white-space:nowrap}
+.lean .axis{display:inline-flex;gap:3px}
+.lean .dot{width:7px;height:7px;border-radius:50%;background:var(--lean-l);opacity:.3}
+.lean .dot.c{background:var(--lean-c)}.lean .dot.r{background:var(--lean-r)}
+.lean .dot.on{opacity:1;outline:2px solid var(--lean-on);outline-offset:1px}
+.lean .lbl{font-weight:600}.lean.contested .lbl::after{content:" · contested";font-weight:400;color:var(--mut)}
+
+/* ---- lean-distribution bar ---- */
+.leanbar{margin:6px 0 22px}
+.leanbar .track{display:flex;height:12px;border-radius:6px;overflow:hidden;border:.5px solid var(--line2)}
+.leanbar .seg.l{background:var(--lean-l)}.leanbar .seg.c{background:var(--lean-c)}.leanbar .seg.r{background:var(--lean-r)}
+.leanbar .key{display:flex;gap:16px;font-family:var(--sans);font-size:.76rem;color:var(--mut);margin-top:7px;flex-wrap:wrap}
+
+/* ---- metric cards ---- */
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:8px 0 22px}
+.metric{background:var(--panel);border-radius:5px;padding:14px 16px}
+.metric .ml{font-family:var(--sans);font-size:.8rem;color:var(--mut)}
+.metric .mv{font-family:var(--sans);font-weight:600;font-size:1.5rem;color:var(--ink);margin-top:2px}
+
+/* ---- claims table → cards on mobile ---- */
+.claims{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:.91rem}
+.claims th{text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);font-weight:600;border-bottom:.5px solid var(--line2);padding:8px 10px}
+.claims td{border-bottom:.5px solid var(--line);padding:11px 10px;vertical-align:top;color:var(--body)}
+.status{font-family:var(--sans);font-size:.72rem;font-weight:600;white-space:nowrap;color:var(--ink)}
+.status.s-supported::before{content:"● ";color:var(--ok)}
+.status.s-contested::before{content:"◐ ";color:var(--mut)}
+.status.s-unverified::before,.status.s-missing_source::before{content:"○ ";color:var(--faint)}
+
+/* ---- source cards ---- */
+.src{border:.5px solid var(--line);border-radius:5px;padding:12px 15px;margin:9px 0;background:#fff}
+.src .top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.src .name{font-family:var(--sans);font-weight:600;color:var(--ink)}
+.supports{font-family:var(--sans);font-size:.7rem;font-weight:600;color:var(--ok);border:.5px solid var(--ok);border-radius:6px;padding:1px 8px}
+.src .say{font-family:var(--sans);font-size:.9rem;color:var(--body);margin:7px 0 5px;line-height:1.5}
+.src .meta{font-family:var(--sans);font-size:.78rem;color:var(--mut)}.src .meta a{word-break:break-word}
+
+/* ---- charts (dependency-free CSS bars) ---- */
+.chart{border:.5px solid var(--line);border-radius:5px;padding:15px;margin:14px 0;background:#fff}
+.chart .ct{font-family:var(--sans);font-weight:600;font-size:.95rem;color:var(--ink);margin-bottom:8px}
+.chart .cap{font-family:var(--sans);font-size:.78rem;color:var(--mut);margin-top:8px}
+.bar-row{display:flex;align-items:center;gap:10px;margin:7px 0;font-family:var(--sans);font-size:.82rem}
+.bar-row .lab{flex:0 0 40%;color:var(--body)}
+.bar-row .track{flex:1;background:var(--panel);border-radius:4px;height:13px;border:.5px solid var(--line)}
+.bar-row .fill{background:var(--accent);height:100%;border-radius:3px;min-width:0;display:block}
+.bar-row .val{flex:none;color:var(--ink);font-weight:600;min-width:54px;text-align:right}
+
+/* ---- index / cards ---- */
+.card{border:.5px solid var(--line);border-radius:6px;padding:20px 22px;margin:18px 0;background:#fff}
+.card h3{font-family:var(--serif);font-weight:600;font-size:1.3rem;margin:.25em 0 .1em}
+.card h3 a{text-decoration:none;color:var(--ink)}.card h3 a:hover{color:var(--accent-ink)}
+
+/* ---- article + rail layout (video pages) ---- */
+.layout{max-width:1040px;margin:0 auto;padding:0 22px;display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:46px;align-items:start}
+.col-main{min-width:0;padding:26px 0 8px}
+.rail{position:sticky;top:24px;padding:30px 0 8px;font-family:var(--sans)}
+.railhead{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.09em;color:var(--mut);margin:0 0 6px;padding-bottom:9px;border-bottom:.5px solid var(--line2)}
+.railitem{display:block;text-decoration:none;padding:12px 0;border-bottom:.5px solid var(--line)}
+.railitem:last-child{border-bottom:0}
+.railitem .rt{display:block;font-family:var(--serif);font-size:1rem;line-height:1.3;color:var(--ink);margin:6px 0 2px}
+.railitem:hover .rt{color:var(--accent-ink)}
+.railitem .rc{display:block;font-size:.76rem;color:var(--mut)}
+@media (max-width:880px){
+  .layout{grid-template-columns:1fr;gap:0;max-width:var(--wrap)}
+  .col-main{padding-bottom:0}
+  .rail{position:static;border-top:1.5px solid var(--ink);margin-top:34px;padding-top:20px}
+}
+
+/* ---- note-to-editor form ---- */
+.noteform{margin:20px 0;max-width:560px;font-family:var(--sans)}
+.noteform .hp{display:none}
+.noteform label{display:block;font-size:.82rem;font-weight:600;color:var(--ink);margin:16px 0 6px}
+.noteform label span{font-weight:400;color:var(--mut)}
+.noteform input,.noteform textarea{width:100%;font-family:var(--sans);font-size:.95rem;color:var(--ink);background:#fff;border:.5px solid var(--line2);border-radius:5px;padding:11px 13px;line-height:1.5}
+.noteform input:focus,.noteform textarea:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+.noteform textarea{resize:vertical;min-height:120px}
+.noteform button{margin-top:18px;font-family:var(--sans);font-size:.9rem;font-weight:600;color:#fffefb;background:var(--accent-ink);border:0;border-radius:5px;padding:11px 24px;cursor:pointer}
+.noteform button:hover{background:var(--accent)}
+.formnote{font-size:.78rem;color:var(--mut);margin-top:14px}
+
+/* ---- footer (byte-identical) ---- */
+.foot{border-top:1.5px solid var(--ink);margin-top:52px;background:var(--panel)}
+.foot .wrap{padding:22px 22px 44px;font-family:var(--sans);font-size:.82rem;color:var(--mut);line-height:1.55}
+.foot .links{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:10px}
+.foot .links a{color:var(--accent-ink);text-decoration:none}
+.foot .disc strong{color:var(--ink)}
+
+@media (max-width:600px){
+  body{font-size:17px}h1{font-size:1.6rem}
+  .claims thead{position:absolute;left:-999px}
+  .claims,.claims tbody,.claims tr,.claims td{display:block;width:100%}
+  .claims tr{border:.5px solid var(--line);border-radius:5px;margin:10px 0;padding:6px 4px;background:#fff}
+  .claims td{border:0;padding:7px 13px}
+  .claims td::before{content:attr(data-l);display:block;font-size:.66rem;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);font-weight:600;margin-bottom:3px}
+  .howmade .row{flex-direction:column;gap:0}.howmade dd{text-align:left}
+  .bar-row{flex-wrap:wrap}.bar-row .lab{flex:1 0 100%}
+}
