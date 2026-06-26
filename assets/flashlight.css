@@ -103,6 +103,14 @@ main{padding:26px 0 8px}
 .card h3{font-family:var(--serif);font-weight:600;font-size:1.3rem;margin:.25em 0 .1em}
 .card h3 a{text-decoration:none;color:var(--ink)}.card h3 a:hover{color:var(--accent-ink)}
 
+/* ---- contested cross-family lean (panel split) ---- */
+.leansplit{font-family:var(--sans);font-size:.66rem;color:var(--mut);border:.5px solid var(--line2);border-radius:5px;padding:1px 7px;white-space:nowrap}
+.bar-row .dpsrc{font-family:var(--sans);font-size:.72rem;color:var(--accent-ink);text-decoration:none;margin-left:5px;opacity:.75}
+.bar-row .dpsrc:hover{opacity:1;text-decoration:underline}
+
+/* respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce){*{animation-duration:.01ms !important;transition-duration:.01ms !important;scroll-behavior:auto !important}}
+
 /* ---- article + rail layout (video pages) ---- */
 .layout{max-width:1040px;margin:0 auto;padding:0 22px;display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:46px;align-items:start}
 .col-main{min-width:0;padding:26px 0 8px}
