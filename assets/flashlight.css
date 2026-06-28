@@ -102,7 +102,43 @@ main{padding:26px 0 8px}
 .card{border:.5px solid var(--line);border-radius:6px;padding:20px 22px;margin:18px 0;background:#fff}
 .card h3{font-family:var(--serif);font-weight:600;font-size:1.3rem;margin:.25em 0 .1em}
 .card h3 a{text-decoration:none;color:var(--ink)}.card h3 a:hover{color:var(--accent-ink)}
-.libgroup{margin:0 0 34px}.libgroup>h2{margin-bottom:.1em}.libgroup>.dek{font-size:1.02rem;margin:.15em 0 .7em}
+/* ---- The Library (topic shelves; a quiet reading room, not a feed) ---- */
+.libmain{max-width:1040px;margin:0 auto;padding:0 22px}
+.lib-hero{padding:38px 0 24px;border-bottom:1.5px solid var(--ink)}
+.lib-hero h1{font-size:2.5rem;line-height:1.1;margin:.05em 0 .2em}
+.lib-hero .dek{max-width:640px}
+.lib-hero .hero-meta{font-family:var(--sans);font-size:.82rem;color:var(--mut);margin-top:18px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.lib-hero .hero-meta strong{color:var(--ink)}
+.lib-hero .hero-meta .sep{width:.5px;height:13px;background:var(--line2)}
+.topicrail{margin:20px 0 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.topicrail .rail-lab{font-family:var(--sans);font-size:.7rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--mut);margin-right:2px}
+.tchip{font-family:var(--sans);font-size:.82rem;color:var(--ink);background:#fff;border:.5px solid var(--line2);border-radius:20px;padding:6px 13px;text-decoration:none;line-height:1}
+.tchip:hover{border-color:var(--accent);color:var(--accent-ink)}
+.shelf{padding:28px 0;border-bottom:.5px solid var(--line)}
+.shelf-head h2{font-family:var(--serif);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;color:var(--ink);border:0;margin:0;padding:0}
+.shelf .blurb{font-family:var(--serif);font-size:1.06rem;color:var(--mut);margin:.25em 0 16px;max-width:580px}
+.shelf-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.tcard{background:#fff;border:.5px solid var(--line);border-radius:8px;padding:18px 18px 15px;display:flex;flex-direction:column;min-height:158px;text-decoration:none}
+.tcard:hover{border-color:var(--line2);box-shadow:0 1px 0 var(--line)}
+.tcard .lean{margin-bottom:11px}
+.tcard .tc-title{font-family:var(--serif);font-weight:600;font-size:1.22rem;line-height:1.24;color:var(--ink);margin:0 0 8px}
+.tcard:hover .tc-title{color:var(--accent-ink)}
+.tcard .tc-src{font-family:var(--sans);font-size:.8rem;color:var(--mut);margin:0 0 12px}
+.tcard .foot{margin-top:auto;padding-top:11px;border-top:.5px solid var(--line);font-family:var(--sans);font-size:.74rem;color:var(--mut)}
+.tcard.sourcing{background:transparent;border:.5px dashed var(--line2);justify-content:center}
+.tcard.sourcing:hover{box-shadow:none}
+.tcard.sourcing .tc-title{font-weight:400;color:var(--mut);font-size:1.08rem}
+.tcard.sourcing .src-kick{font-family:var(--sans);font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--lean-c);margin-bottom:10px}
+@media (max-width:640px){.lib-hero h1{font-size:1.95rem}.shelf-grid{grid-template-columns:1fr}}
+/* ---- Closed on Sundays ---- */
+html.fs-closed body>*:not(#fs-sunday){display:none}
+#fs-sunday{display:none}
+html.fs-closed #fs-sunday{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:40px 22px;background:var(--paper)}
+#fs-sunday .fs-kick{font-family:var(--sans);font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:0 0 20px}
+#fs-sunday .fs-head{font-family:var(--serif);font-weight:600;font-size:2.4rem;line-height:1.15;color:var(--ink);margin:0 0 16px}
+#fs-sunday .fs-sub{font-family:var(--serif);font-size:1.12rem;line-height:1.55;color:var(--mut);max-width:440px;margin:0 0 28px}
+#fs-sunday .fs-enter{font-family:var(--sans);font-size:.84rem;color:var(--accent-ink);background:none;border:0;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+#fs-sunday .fs-foot{font-family:var(--sans);font-size:.78rem;color:var(--mut);margin:34px 0 0}
 
 /* ---- evidence tally (counts, never a verdict score) ---- */
 .evidence{border:.5px solid var(--line2);border-radius:6px;background:var(--panel);padding:14px 16px 12px;margin:16px 0 22px}
