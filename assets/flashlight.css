@@ -102,6 +102,7 @@ main{padding:26px 0 8px}
 .card{border:.5px solid var(--line);border-radius:6px;padding:20px 22px;margin:18px 0;background:#fff}
 .card h3{font-family:var(--serif);font-weight:600;font-size:1.3rem;margin:.25em 0 .1em}
 .card h3 a{text-decoration:none;color:var(--ink)}.card h3 a:hover{color:var(--accent-ink)}
+.libgroup{margin:0 0 34px}.libgroup>h2{margin-bottom:.1em}.libgroup>.dek{font-size:1.02rem;margin:.15em 0 .7em}
 
 /* ---- evidence tally (counts, never a verdict score) ---- */
 .evidence{border:.5px solid var(--line2);border-radius:6px;background:var(--panel);padding:14px 16px 12px;margin:16px 0 22px}
@@ -166,3 +167,26 @@ main{padding:26px 0 8px}
   .howmade .row{flex-direction:column;gap:0}.howmade dd{text-align:left}
   .bar-row{flex-wrap:wrap}.bar-row .lab{flex:1 0 100%}
 }
+
+/* ---- glance module (opens every context page): the "oh, okay" — one-sidedness, never a verdict.
+   Punches up ONE number (sources left out); lean lives only in the page kicker, so a left page and a
+   right page read with identical heat. Solid bar + hatched bar carry the lopsidedness pre-attentively. */
+.glancebox{border:1px solid var(--line2);border-radius:9px;background:#fff;padding:16px 18px 15px;margin:16px 0 28px}
+.glancebox .gx-lead{font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin:0 0 13px}
+.gx-grid{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.gx-big{display:flex;align-items:center;gap:11px;flex:none}
+.gx-num{font-family:var(--sans);font-weight:600;font-size:2.7rem;line-height:.95;color:var(--ink)}
+.gx-numlab{font-family:var(--sans);font-size:.82rem;line-height:1.25;color:var(--body)}
+.gx-meter{flex:1;min-width:175px}
+.gx-bar{display:flex;height:16px;border-radius:5px;overflow:hidden;border:.5px solid var(--line2)}
+.gx-bar .seen{background:var(--accent)}
+.gx-bar .out{background:repeating-linear-gradient(45deg,var(--mut),var(--mut) 2px,#cdc7bc 2px,#cdc7bc 6px)}
+.gx-barkey{display:flex;justify-content:space-between;font-family:var(--sans);font-size:.74rem;color:var(--mut);margin-top:6px}
+.gx-cap{font-family:var(--sans);font-size:.75rem;color:var(--mut);margin:11px 0 0;line-height:1.45}
+.gx-other{font-family:var(--serif);font-size:1.05rem;line-height:1.46;color:var(--ink);margin:14px 0 0;padding:12px 0 0;border-top:.5px solid var(--line)}
+.gx-other a{font-family:var(--sans);font-size:.78rem}
+.gx-otherlab{display:block;font-family:var(--sans);font-size:.66rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 5px}
+.gx-tally{font-family:var(--sans);font-size:.78rem;color:var(--mut);margin-top:13px;padding-top:12px;border-top:.5px solid var(--line);display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.gx-tally .gd{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:3px}
+.gx-tally .gd.ok{background:var(--ok)}.gx-tally .gd.deb{background:var(--mut)}
+@media (max-width:600px){.gx-num{font-size:2.3rem}.gx-grid{gap:14px}}
