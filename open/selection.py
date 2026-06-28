@@ -3,12 +3,12 @@ engine/selection.py — the mechanical, POLITICS-BLIND eligibility decision for 
 
 The firewall's central teaching is that the danger is the SELECTION, not the page. This module makes
 "politics-blind" a TESTABLE property instead of operator prose: eligibility() scores a candidate on a
-fixed five-condition test and NEVER reads creator_lean. lean_flip_invariant() proves it — flip every
+fixed six-condition test and NEVER reads creator_lean. lean_flip_invariant() proves it — flip every
 candidate's lean label, re-run, and assert ZERO eligibility decisions change. If anyone ever wires lean
 (directly or via a proxy) into the decision, the invariant fails and the build breaks. That is the
 mechanical-symmetry guarantee the sealed SELECTION.md asks for, made executable.
 
-Conditions (ALL FIVE must pass; each a structural property of the VIDEO, checked identically for every
+Conditions (ALL SIX must pass; each a structural property of the VIDEO, checked identically for every
 channel — creator_lean is recorded for balance accounting ONLY, never read here):
   1 specific_claims  — >=1 checkable numeric/named factual claim (pure opinion has nothing to source)
   2 contested_topic  — topic is on the sealed durable-contest slate (we never invent a controversy)
@@ -18,6 +18,8 @@ channel — creator_lean is recorded for balance accounting ONLY, never read her
                        subscriber number covertly leans, because channel sizes differ by side/format)
   5 add_value        — a real both-sides spectrum is buildable AND >=1 source SUPPORTS the video's own
                        claim (else the page would fail GOAL.md firewall condition 3 — cut here, pre-work)
+  6 topic_not_person — the video contests an ISSUE, not a named individual's character or "record" (we
+                       cover topics, never put a person on trial — mechanism-not-actor at the selection layer)
 
 These thresholds and the topic slate are POLICY: they live in the sealed SELECTION.md and are mirrored
 here. Change them only by re-sealing, never to fit a result.
@@ -55,6 +57,7 @@ class Candidate:
     # ---- recorded for balance/logging ONLY; the decision must not read these ----
     creator_lean: str = ""            # "left" | "right" | "none"
     channel: str = ""
+    targets_named_person: bool = False  # video is a character/"record" attack on a named individual → ineligible
 
 
 def eligibility(c: Candidate) -> dict:
@@ -66,6 +69,7 @@ def eligibility(c: Candidate) -> dict:
         "one_sided": c.cites_opposing_source is False,
         "clears_floor": (c.channel_subs >= SUB_FLOOR) or (c.video_views >= VIEW_FLOOR),
         "add_value": bool(c.spectrum_buildable and c.has_supporting_source),
+        "topic_not_person": c.targets_named_person is False,
     }
     fails = [k for k, ok in cond.items() if not ok]
     return {"eligible": not fails, "conditions": cond, "fail_reasons": fails}
@@ -102,6 +106,7 @@ def _selftest() -> int:
         "below floor cut (small channel + low views)": (Candidate("c4", "guns", 2, False, 100_000, 50_000, True, True, "left"), False),
         "small channel BIG video passes (OR floor)": (Candidate("c5", "guns", 2, False, 100_000, 900_000, True, True, "right"), True),
         "no supporting source cut (both-sides unbuildable)": (Candidate("c6", "guns", 2, False, 1_000_000, 3_000_000, True, False, "left"), False),
+        "person-attack video cut (targets a named individual)": (Candidate("c7", "guns", 2, False, 1_000_000, 3_000_000, True, True, "right", targets_named_person=True), False),
     }
     fails = 0
     print("=== engine/selection self-test ===")

@@ -15,10 +15,12 @@ PKG = os.path.join(ROOT, "runs", "agent_v1", "packages.json")
 
 SEEDED_LEASH = {
     "describe_header": "x",
+    "topic": "A senator's record on three bills",
+    "headline": "Three viral claims about a senator",
     "hook": "Here's what they're NOT telling you — the truth is the creator is lying. →[link]",
     "synthesis_5th_grade": "You should distrust this video. Therefore reject it.",
     "spectrum": [{"url": "u", "lean": "left", "supports_video_claim": True}],
-    "claims": [],
+    "claims": [{"claim": "He supports genocide.", "status": "supported"}],
 }
 SEEDED_FLASHLIGHT = {
     "describe_header": "This page describes; it does not prescribe. What you conclude is yours.",
@@ -58,7 +60,19 @@ def main():
     assert flash["pass"], f"SELF-TEST FAILED: a seeded FLASHLIGHT was blocked: {flash['failures']}"
     fired = [f["condition"] for f in leash["failures"]]
     print(f"  seeded LEASH caught — conditions fired: {fired}")
+    assert "NO_CHARGED_VERDICT" in fired and "TOPICS_NOT_PEOPLE" in fired, \
+        "SELF-TEST FAILED: the person-target / charged-verdict guards did not fire"
     print("  seeded FLASHLIGHT passed clean")
+
+    # regression: pages pulled for targeting a named person must FAIL the hardened gate (never re-ship)
+    held_f = os.path.join(ROOT, "runs", "agent_v1", "held_pages.json")
+    if os.path.exists(held_f):
+        held = json.load(open(held_f))
+        for e in held:
+            hp = e.get("package", e)
+            assert not firewall_check(hp)["pass"], \
+                f"REGRESSION FAILED: quarantined page {hp.get('id')} now PASSES the firewall"
+        print(f"  regression: {len(held)} quarantined page(s) still caught by the firewall")
 
     print("\n" + ("ALL PAGES PASS" if failed == 0 else f"{failed} PAGE(S) FAILED"))
     sys.exit(1 if failed else 0)

@@ -20,6 +20,16 @@ BLAME = re.compile(r"(is lying|is misleading you|is dishonest|the creator is wro
 # selling / market language (money OUT) — narrow, to avoid flagging financial TOPICS (cost, $, prices)
 MONEY = re.compile(r"(subscribe to us|our product|sign up now|premium plan|pricing plan|monetize|"
                    r"buy now|our service|paying customers|our sponsor)", re.I)
+# charged moral/criminal characterizations of a person — may be REPORTED as an attributed/contested claim,
+# but NEVER asserted by us as established fact (a claim marked "supported"). "X supports genocide" marked
+# supported is a verdict on a person, not a fact we can stand behind.
+CHARGED = re.compile(r"(genocid\w*|pedophil\w*|paedophil\w*|groomer|child molest\w*|\brapist\b|\bnazi\b|"
+                     r"fascist|terrorist|traitor|treason\w*|white supremac\w*|\bracist\b|corrupt\w*)", re.I)
+# page framed around judging a NAMED INDIVIDUAL (their "record" / "claims about [a politician]") instead of a
+# contested TOPIC — mechanism-not-actor at the page level: we cover issues, never put a person on trial.
+PERSON_TARGET = re.compile(r"('s record\b|claims about (a |an |the )?[\w\s]{0,30}?"
+                           r"(senator|congress\w*|governor|mayor|president|judge|justice|representative|lawmaker)|"
+                           r"\b(senator|congressman|congresswoman|governor|mayor|lawmaker)\b[^.]{0,40}\brecord\b)", re.I)
 
 
 def _syllables(word: str) -> int:
@@ -71,5 +81,16 @@ def firewall_check(pkg: dict, max_grade: float = 8.0) -> dict:
     chk("MONEY_OUT", not (MONEY.search(hook) or MONEY.search(syn)),
         "output references selling / market / our-product")
     chk("FIFTH_GRADE", g <= max_grade, f"synthesis reading grade {g} exceeds {max_grade}")
+
+    claims = pkg.get("claims", []) or []
+    charged_fact = next((c.get("claim", "") for c in claims
+                         if c.get("status") == "supported" and CHARGED.search(c.get("claim") or "")), "")
+    chk("NO_CHARGED_VERDICT", not charged_fact,
+        "a charged characterization of a person is marked a supported fact — it may only be reported as "
+        f"attributed/contested, never asserted as true: '{charged_fact[:70]}'")
+    topic_hd = (pkg.get("topic") or "") + " | " + (pkg.get("headline") or "")
+    chk("TOPICS_NOT_PEOPLE", not PERSON_TARGET.search(topic_hd),
+        "page is framed around a named individual / their record, not a contested topic (we cover issues, "
+        "never put a person on trial — mechanism-not-actor)")
 
     return {"pass": not fails, "failures": fails, "reading_grade": g}
