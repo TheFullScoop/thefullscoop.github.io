@@ -130,6 +130,24 @@ main{padding:26px 0 8px}
 .tcard.sourcing .tc-title{font-weight:400;color:var(--mut);font-size:1.08rem}
 .tcard.sourcing .src-kick{font-family:var(--sans);font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--lean-c);margin-bottom:10px}
 @media (max-width:640px){.lib-hero h1{font-size:1.95rem}.shelf-grid{grid-template-columns:1fr}}
+/* topic board — SELECT, don't scroll: a grid of selectable topic tiles */
+.topicboard{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:16px;margin:26px 0 8px}
+.topictile{display:flex;flex-direction:column;align-items:flex-start;background:#fff;border:.5px solid var(--line);border-radius:10px;padding:20px 18px 15px;text-decoration:none;min-height:190px}
+.topictile:hover{border-color:var(--accent);box-shadow:0 1px 0 var(--line)}
+.topictile .tt-icon{width:56px;height:56px;margin-bottom:12px;border-radius:8px}
+.topictile .t-name{font-family:var(--serif);font-weight:600;font-size:1.2rem;line-height:1.2;color:var(--ink);margin:0 0 5px}
+.topictile:hover .t-name{color:var(--accent-ink)}
+.topictile .t-blurb{font-family:var(--sans);font-size:.82rem;line-height:1.45;color:var(--mut);margin:0 0 12px}
+.topictile .t-count{margin-top:auto;font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--accent)}
+.topictile.soon{opacity:.58}
+.topictile.soon:hover{border-color:var(--line);box-shadow:none}
+.topictile.soon .t-count{color:var(--mut)}
+/* topic-page header */
+.backlink{font-family:var(--sans);font-size:.82rem;margin:4px 0 18px}
+.backlink a{color:var(--mut);text-decoration:none}.backlink a:hover{color:var(--accent-ink)}
+.topichead{display:flex;align-items:center;gap:16px;border-bottom:1.5px solid var(--ink);padding-bottom:18px;margin-bottom:6px}
+.topichead-icon{width:60px;height:60px;flex:none;border-radius:8px}
+.topichead h1{margin:.05em 0 .12em}.topichead .kicker{margin-bottom:4px}
 /* ---- Closed on Sundays ---- */
 html.fs-closed body>*:not(#fs-sunday){display:none}
 #fs-sunday{display:none}
@@ -226,3 +244,22 @@ html.fs-closed #fs-sunday{display:flex;flex-direction:column;align-items:center;
 .gx-tally .gd{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:3px}
 .gx-tally .gd.ok{background:var(--ok)}.gx-tally .gd.deb{background:var(--mut)}
 @media (max-width:600px){.gx-num{font-size:2.3rem}.gx-grid{gap:14px}}
+
+/* ---- how-it-works.html: the method / open-catalog page (calm, single-column, house style) ---- */
+.howlink{font-family:var(--sans);font-size:.84rem;margin:-2px 0 18px}
+/* the five-condition test: a checklist a human runs, not a score */
+.method-check{list-style:none;margin:18px 0 26px;padding:0}
+.method-check li{display:flex;gap:14px;align-items:flex-start;padding:15px 0;border-top:.5px solid var(--line)}
+.method-check li:first-child{border-top:0}
+.mc-n{flex:none;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fffefb;font-family:var(--sans);font-weight:600;font-size:.82rem;display:inline-flex;align-items:center;justify-content:center;margin-top:1px}
+.mc-body{display:flex;flex-direction:column}
+.mc-lead{font-family:var(--serif);font-weight:600;font-size:1.06rem;color:var(--ink)}
+.mc-gloss{font-family:var(--sans);font-size:.88rem;line-height:1.5;color:var(--mut);margin-top:3px}
+/* the firewall list: principle, not alarm — teal hairline square, no X, no color-coding */
+.firewall{list-style:none;margin:14px 0 22px;padding:0;font-family:var(--sans)}
+.firewall li{position:relative;padding:9px 0 9px 22px;border-top:.5px solid var(--line);font-size:.95rem;line-height:1.5;color:var(--body)}
+.firewall li:first-child{border-top:0}
+.firewall li::before{content:"";position:absolute;left:0;top:15px;width:7px;height:7px;border:1px solid var(--accent);border-radius:1px}
+/* card-catalog cue + sealed-hash chip for the open-files cards */
+.src.catalog{border-top:1.5px solid var(--accent)}
+.seal{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.74rem;color:var(--accent-ink);background:var(--panel);border:.5px solid var(--line2);border-radius:4px;padding:1px 7px;white-space:nowrap;display:inline-block}
