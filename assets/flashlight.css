@@ -80,6 +80,53 @@ main{padding:26px 0 8px}
 .status.s-contested::before{content:"◐ ";color:var(--mut)}
 .status.s-unverified::before,.status.s-missing_source::before{content:"○ ";color:var(--faint)}
 
+/* ---- fact-check scan (replaces the 4-column claims table): glyph + word leads each row, claim is
+   one line, source is a short chip, the long trace tucks into a <details>. Reads in ~3s; dig-in
+   optional. Status is glyph+word only — NEVER a true/false verdict, NEVER red/green tick-vs-cross. */
+.fc-board{font-family:var(--sans);font-size:.92rem;color:var(--body);display:flex;flex-wrap:wrap;
+  align-items:baseline;gap:6px 16px;margin:2px 0 10px}
+.fc-board .fc-traced{font-weight:600;color:var(--ink)}
+.fc-stat{display:inline-flex;align-items:baseline;gap:6px;white-space:nowrap;color:var(--mut)}
+.fc-g{width:8px;height:8px;border-radius:50%;display:inline-block;flex:none;position:relative;top:1px}
+.fc-g.g-ok{background:var(--ok)}.fc-g.g-deb{background:var(--mut)}
+.fc-g.g-faint{background:transparent;border:1px solid var(--faint)}
+.fc-firewall{font-family:var(--sans);font-size:.8rem;line-height:1.5;color:var(--mut);
+  margin:0 0 14px;max-width:560px}.fc-firewall em{font-style:italic;color:var(--body)}
+.factcheck{list-style:none;margin:0 0 6px;padding:0}
+.fc-row{display:grid;grid-template-columns:128px 1fr;gap:16px;align-items:start;
+  padding:14px 0;border-top:.5px solid var(--line)}
+.fc-row:first-child{border-top:0}
+/* the verdict-glyph rail the eye lands on first */
+.fc-status{font-family:var(--sans);font-size:.78rem;font-weight:600;line-height:1.3;color:var(--ink);
+  padding-left:16px;position:relative}
+.fc-status::before{position:absolute;left:0;top:.08em;font-size:.95em}
+.fc-status.g-ok::before{content:"●";color:var(--ok)}
+.fc-status.g-deb::before{content:"◐";color:var(--mut)}
+.fc-status.g-faint::before{content:"○";color:var(--faint)}
+.fc-body{min-width:0}
+.fc-claim{font-family:var(--serif);font-size:1.02rem;line-height:1.42;color:var(--ink);margin:0 0 6px}
+.fc-attrib{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
+.fc-src{font-family:var(--sans);font-size:.78rem;font-weight:600;color:var(--accent-ink);
+  text-decoration:none;background:var(--panel);border:.5px solid var(--line2);border-radius:20px;
+  padding:2px 11px;white-space:nowrap}
+a.fc-src:hover{border-color:var(--accent);color:var(--accent)}
+/* "show the trace" — the wall of prose lives here, opt-in, never deleted */
+.fc-trace{font-family:var(--sans);font-size:.82rem}
+.fc-trace summary{color:var(--mut);cursor:pointer;list-style:none;font-size:.78rem;
+  text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:.5px}
+.fc-trace summary::-webkit-details-marker{display:none}
+.fc-trace summary::before{content:"+ ";font-variant-numeric:tabular-nums}
+.fc-trace[open] summary::before{content:"– "}
+.fc-trace summary:hover{color:var(--accent-ink)}
+.fc-tracebody{font-size:.86rem;line-height:1.55;color:var(--body);margin:9px 0 2px;
+  padding:11px 14px;background:var(--panel);border-radius:5px;border:.5px solid var(--line)}
+.fc-tracebody .fc-note{margin:9px 0 0;padding-top:9px;border-top:.5px solid var(--line2);color:var(--mut)}
+.fc-tracelink{margin:10px 0 0}.fc-tracelink a{font-size:.82rem}
+@media (max-width:600px){
+  .fc-row{grid-template-columns:1fr;gap:7px}
+  .fc-status{padding-left:18px}
+}
+
 /* ---- source cards ---- */
 .src{border:.5px solid var(--line);border-radius:5px;padding:12px 15px;margin:9px 0;background:#fff}
 .src .top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
