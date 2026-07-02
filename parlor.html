@@ -1,0 +1,302 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Parlor — question decks for two — The Full Scoop</title><meta name="description" content="Question decks for two people who want a better conversation. Draw a card, both answer, no winners."><link rel="canonical" href="https://getthefullscoop.org/parlor.html"><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><meta property="og:site_name" content="The Full Scoop"><meta property="og:title" content="The Parlor"><meta property="og:description" content="Question decks for two — draw a card, both answer, no winners."><meta property="og:url" content="https://getthefullscoop.org/parlor.html"><meta property="og:image" content="https://getthefullscoop.org/assets/og-card.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:type" content="article"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="The Parlor"><meta name="twitter:description" content="Question decks for two — draw a card, both answer, no winners."><meta name="twitter:image" content="https://getthefullscoop.org/assets/og-card.png"><link rel="stylesheet" href="assets/flashlight.css"></head><body><a class="skip" href="#main">Skip to content</a><header class="mast"><div class="wrap"><svg class="mast-mark" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="14.8" y="14.2" width="7.2" height="3" rx="1.5" transform="rotate(45 15 15)" fill="#d9b36c"/><circle cx="10" cy="10" r="7.6" fill="#fffefb" stroke="#d9b36c" stroke-width="2"/><rect x="6.6" y="9.6" width="2.1" height="3.8" rx=".6" fill="#2c7a7b"/><rect x="9.5" y="7.6" width="2.1" height="5.8" rx=".6" fill="#8a8276"/><rect x="12.4" y="5.8" width="2.1" height="7.6" rx=".6" fill="#b4791f"/></svg><a class="mast-name" href="index.html">The Full Scoop</a><span class="mast-tag">topics from every angle</span><nav class="nav" aria-label="Sections"><a href="latest.html">Latest</a><a href="parlor.html">The Parlor</a><a href="how-it-works.html">How it works</a></nav></div></header><main id="main" class="libmain"><section class="parlor-hero"><p class="kicker">The Parlor · games for two</p><h1>Draw a card. Both answer.</h1><p class="dek">Two chairs by the fire, no phones, no winners. Pick your decks below, draw a card, and take turns answering out loud. The deck remembers what you’ve drawn, so every card is new until the deck runs dry.</p></section><div class="parlor-rules"><strong>House rules:</strong> both of you answer every card, asker goes second. No wrong answers, no using an answer against someone later. Pass on any card, no explanation owed. One card can last five minutes or the whole evening — there is no clock in here.</div><h2 style="margin-top:1.8em">Choose your decks</h2><p style="font-family:var(--sans);font-size:.9rem;color:var(--mut);margin:-6px 0 0">Tap a deck to add it to the table. Mix as many as you like.</p><div class="deckshelf" id="deckshelf"></div><p class="ad-note" id="adnote">After Dark stays behind the bar until you ask for it — it’s for couples, some cards are intimate, and it only comes out when you both want it to.</p><div class="gametable"><p class="gt-head">The table</p><div class="qcard q-empty" id="qcard" aria-live="polite"><p class="q-deck" id="qdeck">The Parlor</p><p class="q-text" id="qtext">Choose a deck, then draw your first card.</p><p class="q-sub" id="qsub"></p></div><div class="gt-controls"><button type="button" class="btn-draw" id="drawbtn">Draw a card</button><button type="button" class="btn-quiet" id="shufflebtn">Reshuffle the decks</button></div><p class="gt-meta" id="gtmeta"></p><p class="gt-meta" style="opacity:.7">Tip: the space bar draws the next card. The Reading Room closes on Sundays — the Parlor never does.</p></div></main><footer class="foot"><div class="wrap"><div class="links"><a href="index.html">The Library</a><a href="parlor.html">The Parlor</a><a href="selection-log.html">How we choose</a><a href="how-it-works.html">How it works</a><a href="corrections.html">Corrections</a><a href="contact.html">Send a note</a></div><div class="disc">Nothing you draw here is stored anywhere but this device. No accounts, no tracking — just the two of you.</div></div></footer>
+<script>
+(function(){
+"use strict";
+/* Every card: a string, or "question::instruction". Deck sub is the default instruction. */
+var DECKS={
+fr:{name:"First Rounds",cls:"d-lantern",spine:"House deck no. 1",blurb:"Warm-ups. Easy to answer, hard to stop talking about.",sub:"Both of you answer.",cards:[
+"What’s a small thing that made you smile this week?",
+"Which meal from your childhood do you wish you could order right now?",
+"What’s a skill you’d master overnight if you could?",
+"What was your honest first impression of me?",
+"If we had a free Saturday with zero obligations, what’s the perfect version of it?",
+"What song can you not sit still through?",
+"What’s the best gift you’ve ever received — and why did it land?",
+"Which fictional world would you actually want to live in?",
+"What’s something you were weirdly good at as a kid?",
+"If money were no object for one year, how would you spend the year?",
+"What’s your most controversial food opinion?",
+"What tiny luxury feels absurdly worth it to you?",
+"Who was your childhood hero — and what happened to that admiration?",
+"What’s the most memorable meal we’ve ever had together?",
+"If animals could talk, which species would be the rudest?",
+"What’s a smell that takes you straight back somewhere?",
+"What hobby would you take up if you knew you couldn’t fail?",
+"What’s your favorite way to waste time that you never actually call wasted?",
+"Which of your friends would survive longest in a zombie movie — and why?",
+"What did you want to be when you were ten?",
+"What’s the best compliment you’ve ever gotten?",
+"What’s one thing on your bucket list you’ve never said out loud?",
+"If your life had a theme song this month, what would it be?",
+"What’s the strangest thing you believed as a child?",
+"What would your perfect lazy morning look like?",
+"What’s a movie you’ll defend forever, no matter who laughs?",
+"What’s the last thing that made you laugh until it hurt?",
+"Window or aisle — and what does that say about you?",
+"What’s a place you’ve never been that you think about a lot?",
+"What would you title your autobiography today?",
+"If you could have dinner with anyone alive, who is it — and what’s your first question?",
+"What’s something you own that you’d run back into a burning house for?",
+"What talent do you wish you’d never let go rusty?",
+"What’s your ideal number of people at a party?",
+"What food could you happily eat every day for a month?",
+"What’s a rule you had growing up that you now think was ridiculous?",
+"If you got famous for something next year, what would it most likely be?",
+"What’s your favorite sound in the world?",
+"What’s the pettiest hill you will absolutely die on?",
+"Which season fits your personality — and why?",
+"What game did you play endlessly as a kid?",
+"What’s something new you tried this year — and would you do it again?",
+"If our home had a signature scent, what should it be?",
+"What’s the best piece of advice you’ve ever ignored?",
+"What’s a tiny act of kindness from a stranger you still remember?",
+"You have to teach a one-hour class right now, no prep. What’s the class?",
+"What’s the most spontaneous thing you’ve ever done?",
+"What’s your comfort rewatch — the show or movie you return to like a blanket?",
+"What would you do with one extra hour every day that nobody else gets?",
+"What’s a word or phrase you say too much — and where did you pick it up?"
+]},
+deep:{name:"The Deep End",cls:"d-hearth",spine:"House deck no. 2",blurb:"Life, meaning, and the pursuit of happiness. Bring a full glass.",sub:"Take your time. Both answer.",cards:[
+"When do you feel most alive?",
+"What does “enough” look like for you — money, success, all of it?",
+"What belief have you changed your mind about in the last five years?",
+"What do you think happens after we die — and how does that shape how you live?",
+"If you knew you had ten healthy years left, what would change tomorrow?",
+"What are you still trying to prove — and to whom?",
+"What part of your childhood do you catch yourself re-living or re-fighting?",
+"Is happiness a feeling, a habit, or a decision?",
+"What are you most afraid of that you rarely say out loud?",
+"Which of your parents’ traits do you hope to keep — and which do you want to leave behind?",
+"What would you do differently if nobody would ever judge you?",
+"When was the last time you felt truly proud of yourself — not relieved, proud?",
+"What do you owe the world, if anything?",
+"What’s a hard truth you’re currently avoiding?",
+"Is your life right now closer to the one you wanted, or the one you drifted into?",
+"What would your fifteen-year-old self think of who you’ve become — and what would your eighty-year-old self say?",
+"Which do you need more: to be loved, or to be understood?",
+"What does your ideal old age look like?",
+"When do you feel closest to something bigger than yourself?",
+"What’s a grief you’re still carrying?",
+"If work were optional forever, what would give your days shape?",
+"What’s the most important thing you’ve learned the hard way?",
+"Does suffering have a purpose — or do we just give it one afterward?",
+"Which is worse: failing publicly, or never trying? Answer honestly, not nobly.",
+"What’s a compliment you have trouble accepting — and why?",
+"What are you addicted to that isn’t a substance?",
+"What do you want said in your eulogy — and who do you hope says it?",
+"What injustice makes you angriest — and what does that anger say about you?",
+"What’s one thing you believe that most people around you don’t?",
+"Can people fundamentally change? Have you?",
+"What’s the bravest thing you’ve ever done that nobody clapped for?",
+"How much of where you are today is luck?",
+"What’s something beautiful you saw recently that stopped you?",
+"If happiness is a pursuit, what are you actually chasing right now?",
+"What’s a promise you made to yourself that you’ve kept? And one you’ve broken?",
+"What do you need to forgive yourself for?",
+"Who do you envy — and what does that envy point to?",
+"Is time your friend, your enemy, or a stranger?",
+"Would you trade a comfortable life for a meaningful one? Have you ever actually made that trade?",
+"What’s the kindest thing anyone has ever done for you?",
+"When you imagine “home,” what do you actually picture?",
+"What’s a question you hope no one ever asks you? Just name it — you don’t have to answer it.",
+"What are you learning right now — about the world, or about yourself?",
+"If you could know the full truth about one thing, would you? What is it?",
+"What’s your definition of a wasted life?",
+"What small daily moment gives you a disproportionate amount of joy?",
+"What do you think your purpose is in this season of your life?",
+"What would you tell your younger self about pain?",
+"Where does your self-worth come from on the good days? And on the bad ones?",
+"What’s something you’ll never do again — and what did it teach you?",
+"Fate, chaos, or something in between?",
+"Which legacy matters more: what you build, who you raise, or how you loved?",
+"What’s the loneliest you’ve ever felt — and what got you through it?",
+"If your life so far had chapters, what would this one be called?",
+"What does “the pursuit of happiness” get wrong?"
+]},
+us:{name:"The Story of Us",cls:"d-embers",spine:"House deck no. 3",blurb:"Cards about the two of you — the chapters written and unwritten.",sub:"Both answer — then compare notes.",cards:[
+"What was the exact moment you knew this was more than casual?",
+"What’s your favorite completely ordinary day we’ve ever had?",
+"What’s something I do that makes you feel loved — that I probably don’t realize I do?",
+"What were you nervous about early on that turned out fine?",
+"If you could relive one day of us, which one?",
+"What’s a hard season we got through that you’re proud of?",
+"What do we do better than any couple you know?",
+"What’s a tradition we should start this year?",
+"What’s your favorite photo of us — and why that one?",
+"What did you learn about love from watching your parents — and what have we rewritten?",
+"When do you feel most connected to me?",
+"What should we be doing in five years that we’re not doing yet?",
+"What’s the funniest thing that’s ever happened to us that no one else finds funny?",
+"What song will always be ours?",
+"What do I do when I’m stressed that you’ve quietly learned to read?",
+"What’s a fight we had that actually made us better?",
+"What’s one thing you’d never change about how we met?",
+"What do you brag about me when I’m not around?",
+"How have you changed because of me — for the better?",
+"What adventure keeps not happening that we should finally book?",
+"What’s my most ridiculous habit that you’ve secretly grown fond of?",
+"When did you last feel butterflies with me?",
+"What should we argue about less — and how?",
+"What’s your favorite thing about our home?",
+"When things go wrong, what role do I play for you — and is it the one you need?",
+"What’s a dream of mine you’re quietly rooting for?",
+"If we won a couple’s trophy, what would it be for?",
+"If our relationship were a movie genre, which one — and which scene are we in right now?",
+"What’s one thing you need more of from me lately?::No defending, no explaining — just listen.",
+"What smell, food, or place is permanently “us” now?",
+"What’s the best trip we’ve ever taken — and what made it work?",
+"What did you think our biggest challenge would be? What has it actually been?",
+"What’s something small I did early on that you never told me you noticed?",
+"How are we different from the couple we were in year one?",
+"What’s your favorite way we say sorry to each other?",
+"Which of my dreams scares you a little — and why?",
+"When did you suddenly see me differently — in a good way?",
+"What do you hope never changes about us?",
+"What should the people who love us copy from how we love each other?",
+"What’s one question you’ve always wanted to ask me but haven’t?::Ask it right now.",
+"When have I surprised you most?",
+"What’s the most “us” purchase we’ve ever made?",
+"If we renewed our vows tomorrow, what’s one line you’d write in?",
+"What’s a way we’ve gotten better at loving each other?",
+"What are you most excited about for our next year together?"
+]},
+sw:{name:"Small Wagers",cls:"d-cellar",spine:"House deck no. 4",blurb:"A betting game: answer for your partner before they answer for themselves.",sub:"Guess your partner’s answer first. Point if you’re right — loser of the night pours the drinks.",cards:[
+"Their dream vacation: beach, mountains, city, or somewhere weird?",
+"The thing they’d grab first in a fire — after people and pets.",
+"Their guilty-pleasure song.",
+"The karaoke song they’d actually pick.",
+"They win the lottery. First purchase?",
+"Their dream job at age eight.",
+"The chore they’d pay any amount of money to never do again.",
+"Their exact order at a fancy steakhouse.",
+"The movie they’ve seen the most times.",
+"The superpower they’d choose.",
+"Their biggest irrational fear.",
+"First thing they’d do with a totally free day alone.",
+"The fictional character they think they’re most like.",
+"The popular food they secretly judge people for liking.",
+"Sweet or savory breakfast, forever?",
+"Them in high school, in exactly three words.",
+"The app they’d struggle most to delete.",
+"Their ideal pet if space and money didn’t matter.",
+"They get $500 that must be spent today. On what?",
+"Their most-used emoji.",
+"Which of you would survive longer in the wilderness?::Both point at the same time. Then defend yourselves.",
+"The last thing that made them cry — happy or sad counts.",
+"Their comfort food after a terrible day.",
+"The decade they’d most want to live in.",
+"The chore they secretly don’t mind doing.",
+"Their walk-up song, if life had one.",
+"What they’d name a boat.",
+"Their coffee or tea order when someone else is buying.",
+"The thing they always forget when packing.",
+"Which of you is more likely to end up famous — and for what?::Both answer. Compare visions.",
+"Their favorite thing about their own body.",
+"The historical era they’d least survive.",
+"Their best feature — your answer versus theirs.::You answer for them, they answer for themselves. Discuss the gap.",
+"Which of you says sorry first, usually?::Both point at the same time.",
+"The movie-montage skill they’d most want.",
+"If they wrote a book, what would it be about?",
+"Their weirdest childhood snack combination.",
+"Which of you is the favorite child?::Both point at the same time. Defend with evidence.",
+"First thing they’d do if they were invisible for a day.",
+"The compliment they most want to hear from you.::Guess it — then say it like you mean it."
+]},
+ad:{name:"After Dark",cls:"d-afterdark",spine:"Kept behind the bar",blurb:"For the two of you, later. Romance, honesty, and heat — at your pace.",sub:"Only if you both want to. Pass freely.",adult:true,cards:[
+"What’s your favorite memory of us in bed — the one you replay?",
+"When do you find me most attractive without me even trying?",
+"What’s something you’ve wanted to try that you haven’t asked for yet?",
+"Slow and tender, or urgent and breathless — what’s tonight’s mood?",
+"What’s a compliment about my body you’ve thought but never said out loud?",
+"What’s the most memorable place we’ve ever been together — and would you risk it again?",
+"What do I wear — or not wear — that undoes you?",
+"What’s a fantasy you’ve never told anyone, even me?::Share only what you’re comfortable sharing.",
+"What part of the slow build-up do you wish lasted longer?",
+"What’s the sexiest non-sexual thing I do?",
+"Describe our best kiss ever. Where were we?",
+"What’s one thing I could do more often that drives you wild?",
+"Lights on or lights off — and why?",
+"What time of day do you want me most?",
+"What’s something new we tried that you’d happily repeat?",
+"We have a hotel room for one night and no obligations. Walk me through the evening.",
+"What’s your favorite way to be touched that has nothing to do with sex?",
+"What’s a boundary you’re grateful we respect — and is there an edge you’d like to explore together?",
+"What do you think about when you think about me in the middle of a workday?",
+"What’s my tell when I’m in the mood?",
+"Massage, bath, or a slow dance in the kitchen — pick our next slow night.",
+"What song would you put on if you were setting the scene tonight?",
+"What’s the most attractive thing you’ve ever watched me do?",
+"When did you last want to kiss me and didn’t?::Fix that now, then answer.",
+"One word for us in bed — and one word you’d like to add to the list.",
+"Say the thing out loud that you’d text me if you were feeling bold right now.",
+"What’s your favorite thing I’ve ever said to you in the dark?",
+"If tonight had a dress code and you chose mine, what is it?",
+"What have you learned about your own desire since we met?",
+"Which feels better: being wanted, or being adored — and how do I show you best?",
+"Each of you: one thing to keep, one to retire, one to try.::Trade answers one at a time.",
+"Confess: what’s the longest you’ve spent thinking about me… in detail?",
+"Kiss for twenty seconds before either of you answers: what makes our chemistry work?",
+"If we wrote a menu for nights in, what are the three courses?",
+"What are you in the mood for right now — honestly?"
+]}};
+var ORDER=["fr","deep","us","sw","ad"];
+var LS_SEL="fs-parlor-sel",LS_SEEN="fs-parlor-seen";
+function load(k,fb){try{var v=JSON.parse(localStorage.getItem(k));return v==null?fb:v}catch(e){return fb}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+var sel=load(LS_SEL,["fr"]);
+var seen=load(LS_SEEN,{});
+ORDER.forEach(function(id){if(!Array.isArray(seen[id]))seen[id]=[]});
+var shelf=document.getElementById("deckshelf");
+var qcard=document.getElementById("qcard"),qdeck=document.getElementById("qdeck"),qtext=document.getElementById("qtext"),qsub=document.getElementById("qsub"),meta=document.getElementById("gtmeta");
+ORDER.forEach(function(id){
+  var d=DECKS[id],b=document.createElement("button");
+  b.type="button";b.className="deck "+d.cls;b.dataset.deck=id;
+  b.setAttribute("aria-pressed",sel.indexOf(id)>=0?"true":"false");
+  b.innerHTML='<span class="d-spine">'+d.spine+(d.adult?" · 18+":"")+'</span><span class="d-name">'+d.name+'</span><span class="d-blurb">'+d.blurb+'</span><span class="d-count">'+d.cards.length+" cards</span>";
+  b.addEventListener("click",function(){
+    var i=sel.indexOf(id);
+    if(i>=0){sel.splice(i,1)}else{sel.push(id)}
+    b.setAttribute("aria-pressed",sel.indexOf(id)>=0?"true":"false");
+    save(LS_SEL,sel);updateMeta();
+  });
+  shelf.appendChild(b);
+});
+function remaining(){var n=0;sel.forEach(function(id){n+=DECKS[id].cards.length-seen[id].length});return n}
+function inPlay(){var n=0;sel.forEach(function(id){n+=DECKS[id].cards.length});return n}
+function updateMeta(){
+  if(!sel.length){meta.textContent="No decks on the table yet.";return}
+  meta.textContent=remaining()+" of "+inPlay()+" cards left on the table.";
+}
+function setCard(deckName,text,sub,empty){
+  qcard.className="qcard"+(empty?" q-empty":"");
+  qdeck.textContent=deckName;qtext.textContent=text;qsub.textContent=sub||"";
+}
+function draw(){
+  if(!sel.length){setCard("The Parlor","Choose a deck from the shelf above, then draw.","",true);return}
+  var pool=[];
+  sel.forEach(function(id){
+    DECKS[id].cards.forEach(function(c,i){if(seen[id].indexOf(i)<0)pool.push([id,i])});
+  });
+  if(!pool.length){
+    setCard("The Parlor","You’ve drawn every card on the table. Reshuffle to deal them back in — the good ones are worth a second round.","",true);
+    return;
+  }
+  var pick=pool[Math.floor(Math.random()*pool.length)];
+  var id=pick[0],i=pick[1],d=DECKS[id];
+  var parts=d.cards[i].split("::");
+  seen[id].push(i);save(LS_SEEN,seen);
+  setCard(d.name,parts[0],parts[1]||d.sub,false);
+  updateMeta();
+}
+document.getElementById("drawbtn").addEventListener("click",draw);
+document.getElementById("shufflebtn").addEventListener("click",function(){
+  sel.forEach(function(id){seen[id]=[]});
+  save(LS_SEEN,seen);updateMeta();
+  setCard("The Parlor","Fresh decks. Draw when you’re ready.","",true);
+});
+document.addEventListener("keydown",function(e){
+  if(e.code==="Space"&&e.target===document.body){e.preventDefault();draw()}
+});
+updateMeta();
+})();
+</script></body></html>
