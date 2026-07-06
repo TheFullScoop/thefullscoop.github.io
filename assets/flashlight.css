@@ -425,10 +425,10 @@ html.fs-closed #fs-sunday{display:flex;flex-direction:column;align-items:center;
 .bookmain{max-width:1060px;margin:0 auto;padding:0 22px}
 .bookhead{padding:34px 0 22px;border-bottom:2px solid var(--ink);position:relative}
 .bookhead::after{content:"";position:absolute;left:0;right:0;bottom:-5px;border-bottom:1px solid var(--line2)}
-.bookhead h1{font-size:2.5rem;line-height:1.08;margin:.05em 0 .2em}
+.bookhead h1{font-size:2.5rem;line-height:1.08;margin:.05em 0 .2em;color:var(--paper-hi)}
 .bookhead .dek{max-width:640px}
 .bh-meta{font-family:var(--sans);font-size:.8rem;color:var(--mut);margin-top:14px;display:flex;gap:13px;flex-wrap:wrap;align-items:center}
-.bh-meta strong{color:var(--ink)}
+.bh-meta strong{color:var(--panel)}
 .bh-meta .sep{width:.5px;height:12px;background:var(--line2)}
 /* the spread: story-so-far page (left) + chapters (right), seam in the middle */
 .spread{display:grid;grid-template-columns:320px minmax(0,1fr);gap:0;margin:26px 0 8px;
