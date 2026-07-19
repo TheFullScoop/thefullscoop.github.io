@@ -250,6 +250,12 @@ html.fs-closed #fs-sunday{display:flex;flex-direction:column;align-items:center;
 /* respect reduced-motion preferences */
 @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms !important;transition-duration:.01ms !important;scroll-behavior:auto !important}}
 
+/* finite read-together routes */
+.guide{max-width:720px;margin:0 auto;padding:34px 22px}.guide ol{padding-left:1.4em}.guide li{margin:0 0 1.35em}.guide .minutes{font:600 .75rem var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.guide-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:18px}.guide-card{display:flex;flex-direction:column;border:.5px solid var(--line);border-radius:6px;background:var(--paper-hi);padding:18px;text-decoration:none}.guide-card:hover{border-color:var(--brass-dim)}.guide-card strong{font-family:var(--serif);font-size:1.15rem;color:var(--ink)}.guide-card span{font-family:var(--sans);font-size:.8rem;line-height:1.45;color:var(--mut);margin-top:6px}
+@media (max-width:600px){.guide-grid{grid-template-columns:1fr}}
+@media print{body{background:#fff}.mast,.foot,.skip{display:none}.guide{max-width:none;padding:0;color:#111}.guide a{color:#111;text-decoration:underline}.guide h1{font-size:26pt}.guide h2{font-size:16pt;break-after:avoid}.guide li{break-inside:avoid}}
+
 /* ---- article + rail layout (video pages) ---- */
 .layout{max-width:1040px;margin:30px auto 8px;padding:0 42px;display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:46px;align-items:start}
 .col-main{min-width:0;padding:26px 0 34px}
