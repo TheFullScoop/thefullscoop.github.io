@@ -133,6 +133,64 @@ commit, and cannot complete the last step of the charter's publish contract on i
 the push is outstanding, and name the exact command. Do not report a session as published
 when it is only committed.
 
+### L-11 · 2026-08-10 · Three errors survived the mechanical checker and were caught by a second pass
+**What happened.** All four chapters passed `check.py` with no errors. A separate adversarial
+re-read against the same sources then found three factual errors and about a dozen overreaches.
+The errors: (1) money ch7 said the August 28 benchmark revision lands "three weeks before the
+next monthly print" — the September employment situation is September 4, seven days later;
+(2) gott ch7 said the Leine backflow-protection programme *begins* mid-August, citing a GEB page
+dated 2025-10-16 — the programme began in October 2025, what begins now is its Hagenweg stage,
+and the cited page's own timetable had been superseded by a July 2026 notice; (3) ai ch7 asserted
+that the organisation Meta's model reached "has not been named", while UPI — cited in the same
+paragraph — says it reached Irregular itself and SiliconANGLE says an unnamed third party.
+**Root cause.** All three are things a source-*presence* check cannot see: arithmetic on two
+dates from one document, a stale page that still loads and still reads as current, and two cited
+sources disagreeing with each other inside one claim cluster.
+**Standing rule.** Run a second pass whose only brief is to find errors, and give it the sources
+rather than the reasoning. Three specific habits it should carry: do the date arithmetic yourself
+rather than trusting the adverb; check the *publication date* of every page cited for something
+described as current; and when a paragraph cites two sources, check them against each other, not
+just against the sentence.
+**Status.** Fixed before publication. The class of error is new to this ledger.
+
+### L-12 · 2026-08-10 · Delegated research consumed the session's whole search budget
+**What happened.** Two research subagents were dispatched in parallel for Göttingen and longevity.
+Both did excellent work and between them used all 200 WebSearch calls for the session. Every
+later verification search in the main thread failed, including the attempt to confirm the ZEUS
+figures independently and the attempt to clear the L-08 debt on ai ch2.
+**Consequence.** Verification had to run on `web_fetch` alone. That mostly worked, but two
+Göttingen pages could not be reopened at all because `web_fetch` only retrieves URLs already in
+the session's provenance set, and a URL surfaced by a subagent is not.
+**Standing rule.** Search is a shared, finite budget. Spend the first calls on the items the
+session will have to verify itself, dispatch subagents after that, and ask any subagent to return
+the verbatim text it relied on rather than only its conclusions — a URL it found may be
+unreachable from the main thread afterwards.
+
+### L-13 · 2026-08-10 · One chapter rests on a single read of a source that could not be reopened
+**What happened.** Göttingen ch7's first two paragraphs — the entire election inventory, the
+accessibility figures, and the Bratschek quotation — come from
+`wahlen.goettingen.de/portal/meldungen/stadt-goettingen-baut-barrierefreiheit-in-wahllokalen-aus-900005301-25480.html`,
+read once by a research subagent that quoted it verbatim. Neither the main thread nor the
+verification pass could reopen it (provenance restriction, see L-12).
+**What was done about it.** The inventory contained two coincidences that a second read would
+settle in a second — 111 polling stations and 111 cardboard ballot boxes; 1,600 envelopes and
+1,600 poll workers needed. Rather than publish an unverifiable digit, the less load-bearing figure
+of each pair was cut. The rest ran, single-sourced to the city's own release, which is tier 1.
+**Standing rule.** When a claim rests on one read that cannot be repeated, say so in the ledger
+and reduce the exposure: keep the figures the chapter needs, drop the ones that only add texture,
+and be especially suspicious of repeated numbers.
+**Open.** Next session: reopen that page and confirm the 111 / 1,600 figures and the quotation.
+
+### L-08 update · 2026-08-10 · Legacy sourcing debt unchanged
+No legacy chapter was hardened this session. The two low-trust sources `check.py` still flags —
+`aitoolsrecap` in ai ch2 (the White House "advanced talks" and the 5% equity-stake figure) and
+`247wallst` in money ch2 — were not cleared, because clearing them requires searching and the
+budget was gone (L-12). The 247wallst link is at least already beside a BLS primary in its own
+cluster; the aitoolsrecap one is not, and the "roughly 5% of OpenAI" figure still rests on one
+aggregator plus one Fortune piece. **Do not rewrite that paragraph without re-verifying it**; the
+rule in L-08 stands. Priority order is otherwise unchanged: ai ch2, money ch4 and ch5, ai ch4,
+money ch1, longevity ch2, ai ch1.
+
 ---
 
 ## Decisions (settled; do not re-litigate)
@@ -153,6 +211,27 @@ with the rule above.
 prose carries the specific dates. This keeps a book's chapter sequence readable as a
 timeline of tending rather than a contested claim about when news happened.
 
+### D-03 · 2026-08-10 · When two cited sources disagree, show the disagreement
+**Question raised.** UPI reported that Meta's model reached the systems of Irregular, the testing
+firm itself. SiliconANGLE reported an unnamed third-party organisation. Meta's own quoted statement
+settles neither. Both outlets were already cited in the same paragraph.
+**Decision.** Name the disagreement in the prose and attribute each account to the outlet that made
+it. Do not average them, do not pick the better sentence, and do not quietly assert the negative.
+This is the conflict test from `STANDARDS.md` §1 applied where tier 1 does not exist yet: when the
+primary is silent and two tier-2 sources differ, the disagreement is itself the reportable fact.
+**Revisit if.** Meta publishes the promised retrospective, which would supply the primary.
+
+### D-04 · 2026-08-10 · What may be added to `check.py`'s PRIMARY_HINTS
+**Question raised.** Three domains used this session were tier 1 under `STANDARDS.md` §1 but were
+not recognised by the checker: `novonordisk.com` (a company's own investor page), and
+`niedersachsen.de` / `nlwkn` (a German state water authority publishing its own gauge readings).
+German and other non-US public bodies do not have `.gov` addresses, so the list under-counted them.
+**Decision.** A domain may be added when it is the body that did the thing, judged on the standard
+and not on whether it happens to help the current session. Added: `novonordisk.com`, `lilly.com`,
+`novartis.com`, `niedersachsen.de`, `nlwkn`, `dwd.de`. Record every addition here, so that raising
+a measured score is never a silent act.
+**Do not.** Add a domain to clear a warning about a source you have not read.
+
 ---
 
 ## Open questions
@@ -168,3 +247,12 @@ Longevity was skipped on 2026-07-20 and 2026-07-27, for good reasons recorded in
 reviews: the candidate items were recycled coverage of older papers. A reader of the live
 book cannot tell the difference between "nothing happened" and "nobody looked." The Study
 covers site-level reasoning but not per-book silence.
+
+### Q-03 · 2026-08-10 · How should a living book carry a number that was revised after publication?
+Money ch2 was built on a June payroll figure of +57,000. On August 7 that figure became +20,000.
+Nothing here is deleted, so ch2 still reads +57,000 and ch7 records the revision — but a reader
+who lands on ch2 from a search result sees a superseded number with no signal attached. The
+obvious fix, an editor's note inside ch2, sits awkwardly against the promise that the record only
+ever gets longer. Some device is needed that marks a superseded figure without rewriting the
+chapter that carried it. Worth designing carefully: a book about markets and a book about clinical
+trials will both keep hitting this, and the answer also bears on Q-01.
