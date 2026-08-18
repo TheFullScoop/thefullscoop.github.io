@@ -191,6 +191,34 @@ aggregator plus one Fortune piece. **Do not rewrite that paragraph without re-ve
 rule in L-08 stands. Priority order is otherwise unchanged: ai ch2, money ch4 and ch5, ai ch4,
 money ch1, longevity ch2, ai ch1.
 
+### L-13 update · 2026-08-18 · The single-read source was reopened; the figures held
+The `wahlen.goettingen.de` release was reopened and read in full this session. Every figure
+that ran in gott ch7 is on the page, including the suspicious pair: 111 polling stations at
+48 sites and 111 cardboard ballot boxes are both real, as are the ~1,600 envelopes. The
+Bratschek quotation is verbatim. Two overreaches were found and corrected in ch7 before it
+reached the live site: "towards a total of 1,600" poll workers was not on the cited page
+(its 1,600 is envelopes; the ~400 shortfall is on the page), and "five care homes" rested
+on an ambiguous German list that may name four facilities or five — reworded without the
+count. **L-13 closed.**
+
+### L-14 · 2026-08-18 · A session crashed mid-commit and its work sat stranded for a week
+**What happened.** The 2026-08-10 session wrote four chapters, ledger entries and a study
+entry, recorded its charter session-log line with "(see commit below)" — and never
+committed. Its git process crashed mid-commit, leaving a zero-byte `.git/index.lock` dated
+the exact minute (L-09's failure class, second occurrence). Nothing surfaced for a week
+because no session ran in between. Combined with L-10, the live site had not moved since
+2026-07-19 despite three sessions of verified work.
+**What was done.** The lock was confirmed stale by L-09's test (zero bytes, one week old,
+no live git process) and removed — which itself required Ryan to grant file deletion; the
+sandbox's own `rm` returned "Operation not permitted". The stranded work was checked
+against `check.py` and the charter log, then committed under its own label (7ffddf8).
+**Standing rule.** A session has not committed until `git log -1` shows its commit; check
+that before writing the session-log line, and record the hash, never "(see commit below)".
+If removing a stale lock fails in the sandbox, request the deletion grant rather than
+working around the lock.
+**Still open (L-10).** The push still requires the host: 8408e6f, 7ffddf8 and this
+session's commit are unpushed until Ryan runs `git push`.
+
 ---
 
 ## Decisions (settled; do not re-litigate)
@@ -231,6 +259,14 @@ and not on whether it happens to help the current session. Added: `novonordisk.c
 `novartis.com`, `niedersachsen.de`, `nlwkn`, `dwd.de`. Record every addition here, so that raising
 a measured score is never a silent act.
 **Do not.** Add a domain to clear a warning about a source you have not read.
+
+### D-04 update · 2026-08-18 · Three domains added to PRIMARY_HINTS
+`research.meta.ai` and `meta.com` (a company's own release note and its CEO's signed
+essay — the body that did the thing), and `kansascityfed.org` (the Federal Reserve bank
+announcing the event it hosts). All three were read in full this session before being
+added. `huggingface.co` and `x.com` were considered and NOT added: they are platforms
+hosting many parties, so a domain-level hint would over-count, even though individual
+pages on them (Meta's model card, Anthropic's statement) are primary in context.
 
 ---
 
